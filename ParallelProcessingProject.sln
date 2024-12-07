@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTimerGUI", "MultiTimerGUI\MultiTimerGUI.csproj", "{7B7A80AB-BB15-4F5C-B472-E99C4FE1AF8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTimer", "MultiTimer\MultiTimer.csproj", "{3014C082-5BC1-42A0-8F71-56CE87CCF542}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B7A80AB-BB15-4F5C-B472-E99C4FE1AF8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B7A80AB-BB15-4F5C-B472-E99C4FE1AF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B7A80AB-BB15-4F5C-B472-E99C4FE1AF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B7A80AB-BB15-4F5C-B472-E99C4FE1AF8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3014C082-5BC1-42A0-8F71-56CE87CCF542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3014C082-5BC1-42A0-8F71-56CE87CCF542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3014C082-5BC1-42A0-8F71-56CE87CCF542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3014C082-5BC1-42A0-8F71-56CE87CCF542}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
