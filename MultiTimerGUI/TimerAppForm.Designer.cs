@@ -35,13 +35,12 @@ namespace MultiTimerGUI
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            dataGridView = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridView = new DataGridView();
             newButton = new Button();
             removeButton = new Button();
-            settingsGroupBox = new GroupBox();
             delayLabel = new Label();
             hoursNumeric = new NumericUpDown();
             minutesNumeric = new NumericUpDown();
@@ -49,18 +48,41 @@ namespace MultiTimerGUI
             loopCheckBox = new CheckBox();
             instanceCheckBox = new CheckBox();
             stateGroupBox = new GroupBox();
-            progressBar1 = new ProgressBar();
+            progressBar = new ProgressBar();
             PercentageBox = new TextBox();
             playButton = new Button();
             pauseButton = new Button();
             stopButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
-            settingsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)hoursNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)minutesNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)secondsNumeric).BeginInit();
             stateGroupBox.SuspendLayout();
             SuspendLayout();
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "FormattedCounter";
+            dataGridViewTextBoxColumn1.HeaderText = "Counter";
+            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.Width = 175;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            dataGridViewTextBoxColumn2.HeaderText = "Name";
+            dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "Status";
+            dataGridViewTextBoxColumn3.HeaderText = "State";
+            dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Width = 150;
             // 
             // dataGridView
             // 
@@ -77,6 +99,7 @@ namespace MultiTimerGUI
             dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView.ColumnHeadersHeight = 40;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3 });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F);
@@ -87,33 +110,11 @@ namespace MultiTimerGUI
             dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView.EnableHeadersVisualStyles = false;
             dataGridView.GridColor = Color.LightGray;
-            dataGridView.Location = new Point(8, 3);
+            dataGridView.Location = new Point(12, 12);
             dataGridView.Name = "dataGridView";
             dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new Size(511, 301);
+            dataGridView.Size = new Size(511, 529);
             dataGridView.TabIndex = 0;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "Status";
-            dataGridViewTextBoxColumn1.HeaderText = "Counter";
-            dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.HeaderText = "Delay";
-            dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.HeaderText = "State";
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Width = 125;
             // 
             // newButton
             // 
@@ -136,22 +137,6 @@ namespace MultiTimerGUI
             removeButton.Text = "Remove";
             removeButton.UseVisualStyleBackColor = true;
             removeButton.Click += removeButton_Click;
-            // 
-            // settingsGroupBox
-            // 
-            settingsGroupBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            settingsGroupBox.Controls.Add(delayLabel);
-            settingsGroupBox.Controls.Add(hoursNumeric);
-            settingsGroupBox.Controls.Add(minutesNumeric);
-            settingsGroupBox.Controls.Add(secondsNumeric);
-            settingsGroupBox.Controls.Add(loopCheckBox);
-            settingsGroupBox.Controls.Add(instanceCheckBox);
-            settingsGroupBox.Location = new Point(12, 336);
-            settingsGroupBox.Name = "settingsGroupBox";
-            settingsGroupBox.Size = new Size(468, 243);
-            settingsGroupBox.TabIndex = 4;
-            settingsGroupBox.TabStop = false;
-            settingsGroupBox.Text = "Settings";
             // 
             // delayLabel
             // 
@@ -204,33 +189,37 @@ namespace MultiTimerGUI
             // stateGroupBox
             // 
             stateGroupBox.Anchor = AnchorStyles.Bottom;
-            stateGroupBox.Controls.Add(progressBar1);
+            stateGroupBox.Controls.Add(progressBar);
             stateGroupBox.Controls.Add(PercentageBox);
             stateGroupBox.Controls.Add(playButton);
             stateGroupBox.Controls.Add(pauseButton);
             stateGroupBox.Controls.Add(stopButton);
-            stateGroupBox.Location = new Point(535, 237);
+            stateGroupBox.Location = new Point(546, 190);
             stateGroupBox.Name = "stateGroupBox";
             stateGroupBox.Size = new Size(245, 351);
             stateGroupBox.TabIndex = 5;
             stateGroupBox.TabStop = false;
             stateGroupBox.Text = "State";
             // 
-            // progressBar1
+            // progressBar
             // 
-            progressBar1.Location = new Point(17, 275);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(222, 29);
-            progressBar1.TabIndex = 4;
+            progressBar.Location = new Point(17, 290);
+            progressBar.Name = "progressBar";
+            progressBar.Size = new Size(222, 29);
+            progressBar.TabIndex = 4;
             // 
             // PercentageBox
             // 
             PercentageBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            PercentageBox.Location = new Point(60, 99);
+            PercentageBox.Font = new Font("Kristen ITC", 36F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            PercentageBox.Location = new Point(40, 99);
             PercentageBox.Multiline = true;
             PercentageBox.Name = "PercentageBox";
-            PercentageBox.Size = new Size(125, 144);
+            PercentageBox.Size = new Size(169, 170);
             PercentageBox.TabIndex = 3;
+            PercentageBox.Text = "0%";
+            PercentageBox.TextAlign = HorizontalAlignment.Center;
+            PercentageBox.UseSystemPasswordChar = true;
             // 
             // playButton
             // 
@@ -268,7 +257,6 @@ namespace MultiTimerGUI
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(803, 591);
             Controls.Add(stateGroupBox);
-            Controls.Add(settingsGroupBox);
             Controls.Add(removeButton);
             Controls.Add(newButton);
             Controls.Add(dataGridView);
@@ -277,8 +265,6 @@ namespace MultiTimerGUI
             Name = "TimerAppForm";
             Text = "Timer App";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
-            settingsGroupBox.ResumeLayout(false);
-            settingsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)hoursNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)minutesNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)secondsNumeric).EndInit();
@@ -289,7 +275,7 @@ namespace MultiTimerGUI
 
         #endregion
         public DataGridView dataGridView;
-        private GroupBox settingsGroupBox, stateGroupBox;
+        private GroupBox stateGroupBox;
         private NumericUpDown hoursNumeric, minutesNumeric, secondsNumeric;
         private CheckBox loopCheckBox, instanceCheckBox;
         private Label delayLabel;
@@ -298,6 +284,6 @@ namespace MultiTimerGUI
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private TextBox PercentageBox;
-        private ProgressBar progressBar1;
+        private ProgressBar progressBar;
     }
 }

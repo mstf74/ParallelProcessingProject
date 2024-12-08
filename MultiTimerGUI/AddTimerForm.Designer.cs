@@ -38,11 +38,13 @@
             SecondsLable = new Label();
             Dot = new Label();
             label1 = new Label();
+            NameBox = new TextBox();
+            NameLable = new Label();
             SuspendLayout();
             // 
             // AddButton
             // 
-            AddButton.Location = new Point(55, 151);
+            AddButton.Location = new Point(55, 209);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(94, 29);
             AddButton.TabIndex = 0;
@@ -52,7 +54,7 @@
             // 
             // CancelButton
             // 
-            CancelButton.Location = new Point(226, 151);
+            CancelButton.Location = new Point(226, 209);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(94, 29);
             CancelButton.TabIndex = 1;
@@ -62,7 +64,7 @@
             // 
             // SecondsBox
             // 
-            SecondsBox.Location = new Point(268, 74);
+            SecondsBox.Location = new Point(268, 132);
             SecondsBox.Name = "SecondsBox";
             SecondsBox.Size = new Size(74, 27);
             SecondsBox.TabIndex = 2;
@@ -71,7 +73,7 @@
             // 
             // MinutesBox
             // 
-            MinutesBox.Location = new Point(155, 74);
+            MinutesBox.Location = new Point(155, 132);
             MinutesBox.Name = "MinutesBox";
             MinutesBox.Size = new Size(72, 27);
             MinutesBox.TabIndex = 3;
@@ -80,7 +82,7 @@
             // 
             // HoursBox
             // 
-            HoursBox.Location = new Point(43, 74);
+            HoursBox.Location = new Point(43, 132);
             HoursBox.Name = "HoursBox";
             HoursBox.PlaceholderText = "0";
             HoursBox.RightToLeft = RightToLeft.Yes;
@@ -92,7 +94,7 @@
             // HoursLable
             // 
             HoursLable.AutoSize = true;
-            HoursLable.Location = new Point(55, 34);
+            HoursLable.Location = new Point(55, 92);
             HoursLable.Name = "HoursLable";
             HoursLable.Size = new Size(48, 20);
             HoursLable.TabIndex = 5;
@@ -101,7 +103,7 @@
             // MinutesLable
             // 
             MinutesLable.AutoSize = true;
-            MinutesLable.Location = new Point(161, 34);
+            MinutesLable.Location = new Point(161, 92);
             MinutesLable.Name = "MinutesLable";
             MinutesLable.Size = new Size(61, 20);
             MinutesLable.TabIndex = 6;
@@ -110,7 +112,7 @@
             // SecondsLable
             // 
             SecondsLable.AutoSize = true;
-            SecondsLable.Location = new Point(268, 34);
+            SecondsLable.Location = new Point(268, 92);
             SecondsLable.Name = "SecondsLable";
             SecondsLable.Size = new Size(64, 20);
             SecondsLable.TabIndex = 7;
@@ -119,7 +121,7 @@
             // Dot
             // 
             Dot.AutoSize = true;
-            Dot.Location = new Point(233, 81);
+            Dot.Location = new Point(233, 139);
             Dot.Name = "Dot";
             Dot.Size = new Size(12, 20);
             Dot.TabIndex = 8;
@@ -129,15 +131,34 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(122, 81);
+            label1.Location = new Point(122, 139);
             label1.Name = "label1";
             label1.Size = new Size(12, 20);
             label1.TabIndex = 9;
             label1.Text = ":";
             // 
+            // NameBox
+            // 
+            NameBox.Location = new Point(142, 32);
+            NameBox.Name = "NameBox";
+            NameBox.Size = new Size(125, 27);
+            NameBox.TabIndex = 10;
+            // 
+            // NameLable
+            // 
+            NameLable.AutoSize = true;
+            NameLable.Location = new Point(26, 39);
+            NameLable.Name = "NameLable";
+            NameLable.Size = new Size(94, 20);
+            NameLable.TabIndex = 11;
+            NameLable.Text = "Timer Name:";
+            NameLable.Click += NameLable_Click;
+            // 
             // AddTimerForm
             // 
             ClientSize = new Size(382, 253);
+            Controls.Add(NameLable);
+            Controls.Add(NameBox);
             Controls.Add(label1);
             Controls.Add(Dot);
             Controls.Add(SecondsLable);
@@ -168,5 +189,7 @@
         private Label SecondsLable;
         private Label Dot;
         private Label label1;
+        private TextBox NameBox;
+        private Label NameLable;
     }
 }

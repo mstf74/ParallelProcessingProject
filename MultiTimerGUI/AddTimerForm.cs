@@ -24,10 +24,13 @@ namespace MultiTimerGUI
             int hours = 0, minutes = 0, seconds = 0;
             try
             {
+                string name = NameBox.Text;
                 hours = int.Parse(HoursBox.Text);
                 minutes = int.Parse(MinutesBox.Text);
                 seconds = int.Parse(SecondsBox.Text);
-                mainform.timersList.Add(new Multitimer(hours, minutes, seconds));
+                if ((hours < 0 || minutes < 0 || seconds < 0) || (hours == 0 && minutes == 0 && seconds == 0))
+                    throw new Exception();
+                mainform.timersList.Add(new Multitimer(hours, minutes, seconds,name));
                 this.Close();
             }
             catch
@@ -40,6 +43,11 @@ namespace MultiTimerGUI
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void NameLable_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

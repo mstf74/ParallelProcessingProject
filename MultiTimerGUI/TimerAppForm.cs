@@ -11,10 +11,10 @@ namespace MultiTimerGUI
         {
             InitializeComponent();
             uiUpdateTimer = new System.Windows.Forms.Timer();
-            uiUpdateTimer.Interval = 1000; // Update every second
+            uiUpdateTimer.Interval = 500; // Update every second
             uiUpdateTimer.Tick += UiUpdateTimer_Tick;
             uiUpdateTimer.Start();
-
+            this.dataGridView.AutoGenerateColumns = false;
             dataGridView.DataSource = timersList;
 
         }
@@ -42,30 +42,28 @@ namespace MultiTimerGUI
             }
         }
 
-        private void playButton_Click(object sender, EventArgs e)
+        private async void playButton_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count > 0)
+            var selectedTimer = GetTimer();
+            if (selectedTimer is not null)
             {
-                var selectedTimer = GetTimer();
-                if (selectedTimer.Status == "paused")
+                if (selectedTimer.Status == "Paused")
                 {
                     selectedTimer.Resume();
                 }
-                else if (selectedTimer.Status == "running")
+                else if (selectedTimer.Status == "Running")
                 {
                     MessageBox.Show("Timer is already running.");
                     return;
                 }
                 else
                 {
-                    var runningTimer = selectedTimer.Start(); // Run timer asynchronously
-                    //var awaiter = runningTimer.GetAwaiter();
-                    //if (awaiter.GetResult())
-                    //    awaiter.OnCompleted(() => MessageBox.Show("Timer is finished."));
+                    var runningTimer = await Task.Run(() => selectedTimer.Start());
+                    if (runningTimer) 
+                        MessageBox.Show($"Timer {selectedTimer.Name} is finished.");
+
                 }
 
-
-                //dataGridView.Refresh();
             }
             else
             {
@@ -78,13 +76,7 @@ namespace MultiTimerGUI
             var selectedTimer = GetTimer();
             if (selectedTimer is not null)
             {
-
-
                 selectedTimer.Pause();
-
-                // Update DataGridView after timer ends
-                //dataGridView.Refresh();
-
             }
             else
             {
@@ -97,13 +89,7 @@ namespace MultiTimerGUI
             var selectedTimer = GetTimer();
             if (selectedTimer is not null)
             {
-
-
                 selectedTimer.Reset();
-
-                // Update DataGridView after timer ends
-                //dataGridView.Refresh();
-
             }
             else
             {
@@ -122,10 +108,23 @@ namespace MultiTimerGUI
             }
             return null;
         }
+        private void updateProgressBar()
+        {
+            var selectedTimer = GetTimer();
+            if (selectedTimer is not null)
+            {
+                progressBar.Value = selectedTimer.ProgressPercentage;
+                PercentageBox.Text = selectedTimer.ProgressPercentage.ToString()+"%";
+            }
+            else
+                progressBar.Value = 0;
+
+
+        }
         private void UiUpdateTimer_Tick(object sender, EventArgs e)
         {
-            // Refresh DataGridView to reflect updated timer counters
             dataGridView.Refresh();
+            updateProgressBar();
         }
     }
 }
