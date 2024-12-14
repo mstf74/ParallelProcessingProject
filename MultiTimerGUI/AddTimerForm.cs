@@ -13,30 +13,37 @@ namespace MultiTimerGUI
     public partial class AddTimerForm : Form
     {
         private TimerAppForm mainform;
+        private Object locker;
         public AddTimerForm(TimerAppForm _Mainform)
         {
             InitializeComponent();
             this.mainform = _Mainform;
+            this.locker = new Object();
 
         }
+        // add button adding the timer by creating a new object and adding it to the Timerlist.
         private void AddButton_Click(object sender, EventArgs e)
         {
-            int hours = 0, minutes = 0, seconds = 0;
-            try
+            lock (locker)
             {
-                string name = NameBox.Text;
-                hours = int.Parse(HoursBox.Text);
-                minutes = int.Parse(MinutesBox.Text);
-                seconds = int.Parse(SecondsBox.Text);
-                if ((hours < 0 || minutes < 0 || seconds < 0) || (hours == 0 && minutes == 0 && seconds == 0))
-                    throw new Exception();
-                mainform.timersList.Add(new Multitimer(hours, minutes, seconds,name));
-                this.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Please Enter a valid Timer.", "Invalid Timer", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                int hours = 0, minutes = 0, seconds = 0;
+                try
+                {
+                    string name = NameBox.Text;
+                    hours = int.Parse(HoursBox.Text);
+                    minutes = int.Parse(MinutesBox.Text);
+                    seconds = int.Parse(SecondsBox.Text);
+                    if ((hours < 0 || minutes < 0 || seconds < 0) || (hours == 0 && minutes == 0 && seconds == 0))
+                        throw new Exception();
+                    mainform.timersList.Add(new Multitimer(hours, minutes, seconds, name));
+                    this.Close();
+                }
 
+                catch
+                {
+                    MessageBox.Show("Please Enter a valid Timer.", "Invalid Timer", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
             }
         }
 

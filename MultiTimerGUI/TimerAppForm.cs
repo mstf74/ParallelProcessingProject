@@ -7,24 +7,26 @@ namespace MultiTimerGUI
     {
         public BindingList<Multitimer> timersList = new BindingList<Multitimer>();
         private System.Windows.Forms.Timer uiUpdateTimer;
+        // inizialize a GUI timer object to refresh the DataGgridView periodically 
         public TimerAppForm()
         {
             InitializeComponent();
             uiUpdateTimer = new System.Windows.Forms.Timer();
-            uiUpdateTimer.Interval = 500; // Update every second
+            uiUpdateTimer.Interval = 500;
             uiUpdateTimer.Tick += UiUpdateTimer_Tick;
             uiUpdateTimer.Start();
             this.dataGridView.AutoGenerateColumns = false;
             dataGridView.DataSource = timersList;
 
         }
-
+        // new button to create a new MultiTimer object and add it to the timer object list 
+        // opens add timer form
         private void newButton_Click(object sender, EventArgs e)
         {
             var newTimerForm = new AddTimerForm(this);
             newTimerForm.ShowDialog();
         }
-
+        // delete button selects the row from the dataGridView table and deletes the object assigned to it
         private void removeButton_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count > 0)
@@ -41,7 +43,8 @@ namespace MultiTimerGUI
                 MessageBox.Show("Please select a row to remove.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
+        // play button to start the selected timer asynchronously 
+        // checks the status of the timer and invoke object functions based on it 
         private async void playButton_Click(object sender, EventArgs e)
         {
             var selectedTimer = GetTimer();
@@ -59,9 +62,8 @@ namespace MultiTimerGUI
                 else
                 {
                     var runningTimer = await Task.Run(() => selectedTimer.Start());
-                    if (runningTimer) 
+                    if (runningTimer)
                         MessageBox.Show($"Timer {selectedTimer.Name} is finished.");
-
                 }
 
             }
@@ -70,7 +72,7 @@ namespace MultiTimerGUI
                 MessageBox.Show("Please select a row to start the timer.");
             }
         }
-
+        // pause button to pause the selected timer 
         private void pauseButton_Click(object sender, EventArgs e)
         {
             var selectedTimer = GetTimer();
@@ -83,7 +85,7 @@ namespace MultiTimerGUI
                 MessageBox.Show("Please select a row to start the timer.");
             }
         }
-
+        // stop button to reset the timer to its initial value 
         private void stopButton_Click(object sender, EventArgs e)
         {
             var selectedTimer = GetTimer();
@@ -96,6 +98,7 @@ namespace MultiTimerGUI
                 MessageBox.Show("Please select a row to start the timer.");
             }
         }
+        // a helper function to return the selected MultiTimer object from the DataGridView table  
         private Multitimer GetTimer()
         {
             if (dataGridView.SelectedRows.Count > 0)
@@ -108,6 +111,7 @@ namespace MultiTimerGUI
             }
             return null;
         }
+        // the progress bar and box function to show the progress of the selected timer.
         private void updateProgressBar()
         {
             var selectedTimer = GetTimer();
@@ -119,8 +123,8 @@ namespace MultiTimerGUI
             else
                 progressBar.Value = 0;
 
-
         }
+        // the guiTimer function to refresh the dataGridView table and the progress bar periodically.
         private void UiUpdateTimer_Tick(object sender, EventArgs e)
         {
             dataGridView.Refresh();
@@ -128,6 +132,3 @@ namespace MultiTimerGUI
         }
     }
 }
-
-
-

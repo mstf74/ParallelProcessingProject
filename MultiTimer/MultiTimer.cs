@@ -12,6 +12,7 @@ namespace MultiTimer
     {
         private int EndTime { get; set; }
         private int _counter { get; set; }
+        // property to foramte the remain time to HH:MM:SS.
         public string FormattedCounter
         {
             get
@@ -20,6 +21,7 @@ namespace MultiTimer
                 return time.ToString(@"hh\:mm\:ss");
             }
         }
+        // Property to calculate the progress.
         public int ProgressPercentage
         {
             get
@@ -47,13 +49,16 @@ namespace MultiTimer
             _counter = EndTime;
             this.Name = _name;
         }
+        // the start function that is assigned to the thread to run.
+        // using the monitor to ensure that only one thread runs the start methode
+        // and terminate other threads attemping to run it if they didn't join within a second.
         public async Task<bool> Start()
         {
-
-            lock (locker)
+            if (Monitor.TryEnter(locker, 1000))
             {
                 try
                 {
+                    Status = "Running";
                     while (_counter >= 0)
                     {
                         Task.Delay(1000, StopSource.Token).Wait();
@@ -61,7 +66,6 @@ namespace MultiTimer
                         {
                             Task.Delay(100).Wait();
                         }
-                        Status = "Running";
 
                         _counter--;
                     }
@@ -72,8 +76,14 @@ namespace MultiTimer
                 {
                     return false;
                 }
+                finally
+                {
+                    Monitor.Exit(locker);
+                }
             }
+            return false;
         }
+        // reset function to reset the finishing time and regenerate the cancellationToken.
         public void Reset()
         {
             Status = "Ready to start";
@@ -83,6 +93,7 @@ namespace MultiTimer
             if (PauseSource.IsCancellationRequested)
                 PauseSource = new CancellationTokenSource();
         }
+        // function to pause the timer by calling the pause cancellationToken.
         public void Pause()
         {
             if (_counter != EndTime)
@@ -91,7 +102,7 @@ namespace MultiTimer
                 Status = "Paused";
             }
         }
-
+        // function to resume the timer by regenerating the pause token; 
         public void Resume()
         {
             PauseSource = new CancellationTokenSource();
